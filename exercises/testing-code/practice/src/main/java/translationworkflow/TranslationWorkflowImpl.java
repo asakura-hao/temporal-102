@@ -42,7 +42,7 @@ public class TranslationWorkflowImpl implements TranslationWorkflow {
     logger.debug("Preparing to translate Goodbye into languageCode: {}", languageCode);
     TranslationActivityInput goodbyeInput = new TranslationActivityInput("goodbye", languageCode);
     TranslationActivityOutput goodbyeResult = activities.translateTerm(goodbyeInput);
-    String goodbyeMessage = goodbyeResult.getTranslation() + "; " + name;
+    String goodbyeMessage = goodbyeResult.getTranslation() + ", " + name;
 
     return new TranslationWorkflowOutput(helloMessage, goodbyeMessage);
   }

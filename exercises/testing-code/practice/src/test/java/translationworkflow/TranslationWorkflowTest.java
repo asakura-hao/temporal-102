@@ -31,6 +31,8 @@ public class TranslationWorkflowTest {
 
     TranslationWorkflowOutput output =
         workflow.sayHelloGoodbye(new TranslationWorkflowInput("Pierre", "fr"));
+    assertEquals("Bonjour, Pierre", output.getHelloMessage());
+    assertEquals("Au revoir, Pierre", output.getGoodbyeMessage());
 
     // TODO: Part D - Add assertions to validate the hello and goodbye messages
   }
