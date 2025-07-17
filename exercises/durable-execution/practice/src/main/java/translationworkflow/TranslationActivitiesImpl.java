@@ -9,6 +9,8 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import io.temporal.activity.Activity;
 import io.temporal.failure.ApplicationFailure;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import translationworkflow.model.TranslationActivityInput;
 import translationworkflow.model.TranslationActivityOutput;
@@ -16,6 +18,7 @@ import translationworkflow.model.TranslationActivityOutput;
 public class TranslationActivitiesImpl implements TranslationActivities {
 
   // TODO: Define a logger for your Activities here
+  private static final Logger logger = LoggerFactory.getLogger(TranslationActivitiesImpl.class);
 
   @Override
   public TranslationActivityOutput translateTerm(TranslationActivityInput input) {
@@ -24,6 +27,8 @@ public class TranslationActivitiesImpl implements TranslationActivities {
 
     // TODO: Add an info log statement here with the string [ACTIVITY INVOKED]
     // at the beginning along with the name of the Activity and parameters passed
+    logger.info("[ACTIVITY INVOKED] translateTerm invoked with input term: {} language code: {}",
+        term, lang);
 
     // construct the URL, with supplied input parameters, for accessing the
     // microservice
@@ -37,6 +42,7 @@ public class TranslationActivitiesImpl implements TranslationActivities {
           .toURL();
     } catch (IOException e) {
       // TODO: Add an error log statement here at the error level about the exception
+      logger.error(e.getMessage());
       throw Activity.wrap(e);
     }
 
@@ -84,6 +90,7 @@ public class TranslationActivitiesImpl implements TranslationActivities {
         connection.disconnect();
 
         // TODO: Add an error log statement here detailing the exception
+        logger.error("Error invoking microservice: " + errorResponse.toString());
         
         throw ApplicationFailure.newFailure(errorResponse.toString(), IOException.class.getName());
       }
@@ -93,6 +100,7 @@ public class TranslationActivitiesImpl implements TranslationActivities {
     }
     // TODO: Add a debug log statement here stating the Translation was successful
     // include the output
+    logger.debug("Successfully done.");
     
     return result;
   }
