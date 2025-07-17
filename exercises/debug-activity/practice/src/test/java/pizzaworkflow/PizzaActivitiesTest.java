@@ -67,6 +67,18 @@ public class PizzaActivitiesTest {
   // TODO: Write the testSendBillAppliesDiscount Test
 
   @Test
+  public void testSendBillAppliesDiscount() throws InvalidChargeAmountException {
+    testEnvironment.registerActivitiesImplementations(new PizzaActivitiesImpl());
+    PizzaActivities activity = testEnvironment.newActivityStub(PizzaActivities.class);
+    Bill bill = new Bill(12983, "PI314", "5 large cheese pizzas", 6500);
+
+    OrderConfirmation confirmation = activity.sendBill(bill);
+
+    assertEquals("PI314", confirmation.getOrderNumber());
+    assertEquals(6000, confirmation.getAmount());
+  }
+
+  @Test
   public void testSendBillFailsWithNegativeAmount() throws InvalidChargeAmountException {
     testEnvironment.registerActivitiesImplementations(new PizzaActivitiesImpl());
     PizzaActivities activity = testEnvironment.newActivityStub(PizzaActivities.class);

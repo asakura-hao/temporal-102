@@ -44,9 +44,10 @@ public class Starter {
     Pizza pizza1 = new Pizza("Large, with mushrooms and onions", 1500);
     Pizza pizza2 = new Pizza("Small, with pepperoni", 1200);
     // TODO: Create a new pizza object here
+    Pizza pizza3 = new Pizza("Medium, with extra cheese", 1300);
 
     // TODO: Add the new pizza object to the list so it will be included in the order
-    List<Pizza> orderList = Arrays.asList(pizza1, pizza2); 
+    List<Pizza> orderList = Arrays.asList(pizza1, pizza2, pizza3); 
 
     PizzaOrder order = new PizzaOrder("XD001", customer, orderList, true, address);
 

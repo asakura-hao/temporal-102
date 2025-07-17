@@ -51,7 +51,7 @@ public class PizzaActivitiesImpl implements PizzaActivities {
     if (amount > 3000) {
       logger.info("Applying discount");
 
-      chargeAmount = -500; // reduce amount charged by 500 cents
+      chargeAmount = amount - 500; // reduce amount charged by 500 cents
     }
 
     // reject invalid amounts before calling the payment processor
